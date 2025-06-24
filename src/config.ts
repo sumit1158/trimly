@@ -1,0 +1,1 @@
+export const API_BASE_URL = "https://trimly-9iu5.onrender.com"; 

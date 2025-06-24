@@ -3,6 +3,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { Clock, User, Phone, Mail, Check, X, Plus, Calendar } from 'lucide-react';
 import Button from '../../components/Button';
 import toast from 'react-hot-toast';
+import { API_BASE_URL } from '../../config';
 
 interface QueueItem {
   _id: string;
@@ -96,7 +97,7 @@ const QueuePage: React.FC = () => {
 
   const fetchQueue = async () => {
     try {
-      const response = await fetch(`https://trimly-9iu5.onrender.com/api/queue/barber/${user?._id}`);
+      const response = await fetch(`${API_BASE_URL}/api/queue/barber/${user?._id}`);
       if (!response.ok) {
         throw new Error('Failed to fetch queue');
       }
@@ -112,7 +113,7 @@ const QueuePage: React.FC = () => {
 
   const fetchAppointments = async () => {
     try {
-      const response = await fetch(`https://trimly-9iu5.onrender.com/api/appointments/barber/${user?._id}`);
+      const response = await fetch(`${API_BASE_URL}/api/appointments/barber/${user?._id}`);
       if (!response.ok) {
         throw new Error('Failed to fetch appointments');
       }
@@ -122,7 +123,7 @@ const QueuePage: React.FC = () => {
       const appointmentsWithCustomers = await Promise.all(
         data.map(async (appointment: Appointment) => {
           try {
-            const customerResponse = await fetch(`https://trimly-9iu5.onrender.com/api/users/${appointment.userId}`);
+            const customerResponse = await fetch(`${API_BASE_URL}/api/users/${appointment.userId}`);
             if (customerResponse.ok) {
               const customer = await customerResponse.json();
               return {
@@ -163,7 +164,7 @@ const QueuePage: React.FC = () => {
         status: 'waiting'
       };
 
-      const response = await fetch('https://trimly-9iu5.onrender.com/api/queue', {
+      const response = await fetch(`${API_BASE_URL}/api/queue`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -202,7 +203,7 @@ const QueuePage: React.FC = () => {
         isWalkIn: true
       };
 
-      const response = await fetch('https://trimly-9iu5.onrender.com/api/queue', {
+      const response = await fetch(`${API_BASE_URL}/api/queue`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -232,7 +233,7 @@ const QueuePage: React.FC = () => {
 
   const handleStatusUpdate = async (queueId: string, newStatus: QueueItem['status']) => {
     try {
-      const response = await fetch(`https://trimly-9iu5.onrender.com/api/queue/${queueId}/status`, {
+      const response = await fetch(`${API_BASE_URL}/api/queue/${queueId}/status`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -254,7 +255,7 @@ const QueuePage: React.FC = () => {
 
   const removeFromQueue = async (queueId: string) => {
     try {
-      const response = await fetch(`https://trimly-9iu5.onrender.com/api/queue/${queueId}`, {
+      const response = await fetch(`${API_BASE_URL}/api/queue/${queueId}`, {
         method: 'DELETE',
       });
 

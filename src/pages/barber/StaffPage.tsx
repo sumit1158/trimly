@@ -3,6 +3,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { UserPlus, UserMinus, Edit2, Mail, Phone } from 'lucide-react';
 import Button from '../../components/Button';
 import toast from 'react-hot-toast';
+import { API_BASE_URL } from '../../config';
 
 interface StaffMember {
   _id: string;
@@ -35,7 +36,7 @@ const StaffPage: React.FC = () => {
   const fetchStaff = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(`https://trimly-9iu5.onrender.com/api/users?shopId=${user?._id}`);
+      const response = await fetch(`${API_BASE_URL}/api/users?shopId=${user?._id}`);
       if (!response.ok) throw new Error('Failed to fetch staff');
       const data = await response.json();
       setStaff(data);
@@ -50,7 +51,7 @@ const StaffPage: React.FC = () => {
   const handleAddStaff = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch('https://trimly-9iu5.onrender.com/api/users/staff', {
+      const response = await fetch(`${API_BASE_URL}/api/users/staff`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -76,7 +77,7 @@ const StaffPage: React.FC = () => {
     if (!confirm('Are you sure you want to remove this staff member?')) return;
 
     try {
-      const response = await fetch(`https://trimly-9iu5.onrender.com/api/users/staff/${staffId}`, {
+      const response = await fetch(`${API_BASE_URL}/api/users/staff/${staffId}`, {
         method: 'DELETE',
       });
 
@@ -94,7 +95,7 @@ const StaffPage: React.FC = () => {
     e.preventDefault();
     if (!editingStaff) return;
     try {
-      const response = await fetch(`https://trimly-9iu5.onrender.com/api/users/staff/${editingStaff._id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/users/staff/${editingStaff._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

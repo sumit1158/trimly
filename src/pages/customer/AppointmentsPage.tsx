@@ -4,6 +4,7 @@ import { Calendar, Clock, MapPin, Plus } from 'lucide-react';
 import Button from '../../components/Button';
 import toast from 'react-hot-toast';
 import { useAuth } from '../../contexts/AuthContext';
+import { API_BASE_URL } from '../../config';
 
 interface Appointment {
   _id: string;
@@ -57,7 +58,7 @@ const CustomerAppointmentsPage: React.FC = () => {
   const fetchAppointments = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(`https://trimly-9iu5.onrender.com/api/appointments/user/${user?._id}`);
+      const response = await fetch(`${API_BASE_URL}/api/appointments/user/${user?._id}`);
       if (!response.ok) {
         throw new Error('Failed to fetch appointments');
       }
@@ -73,7 +74,7 @@ const CustomerAppointmentsPage: React.FC = () => {
 
   const handleCancel = async (appointmentId: string) => {
     try {
-      const response = await fetch(`https://trimly-9iu5.onrender.com/api/appointments/${appointmentId}/status`, {
+      const response = await fetch(`${API_BASE_URL}/api/appointments/${appointmentId}/status`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -139,7 +140,7 @@ const CustomerAppointmentsPage: React.FC = () => {
     appointment._ratingValue = star;
     setAppointments([...appointments]);
     try {
-      const res = await fetch(`https://trimly-9iu5.onrender.com/api/appointments/${appointment._id}/rating`, {
+      const res = await fetch(`${API_BASE_URL}/api/appointments/${appointment._id}/rating`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ rating: star })

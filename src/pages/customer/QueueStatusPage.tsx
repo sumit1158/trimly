@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Clock, User, MapPin, Phone } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import toast from 'react-hot-toast';
+import { API_BASE_URL } from '../../config';
 
 interface QueueItem {
   _id: string;
@@ -31,7 +32,7 @@ const QueueStatusPage: React.FC = () => {
     try {
       setIsLoading(true);
       // Get all queues where this customer is present
-      const response = await fetch(`https://trimly-9iu5.onrender.com/api/queue/customer/${user?._id}`);
+      const response = await fetch(`${API_BASE_URL}/api/queue/customer/${user?._id}`);
       if (!response.ok) {
         throw new Error('Failed to fetch queue status');
       }
@@ -42,7 +43,7 @@ const QueueStatusPage: React.FC = () => {
         data.map(async (item: QueueItem) => {
           try {
             // Get all waiting customers in this barber's queue
-            const queueResponse = await fetch(`https://trimly-9iu5.onrender.com/api/queue/barber/${item.barberId}`);
+            const queueResponse = await fetch(`${API_BASE_URL}/api/queue/barber/${item.barberId}`);
             if (queueResponse.ok) {
               const allQueue = await queueResponse.json();
               const waitingQueue = allQueue

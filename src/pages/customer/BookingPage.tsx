@@ -4,6 +4,7 @@ import Button from '../../components/Button';
 import toast from 'react-hot-toast';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import { API_BASE_URL } from '../../config';
 
 interface Barber {
   _id: string;
@@ -68,7 +69,7 @@ const BookingPage: React.FC = () => {
     const fetchBarbers = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch('/api/users?role=barber');
+        const response = await fetch(`${API_BASE_URL}/api/users?role=barber`);
         if (!response.ok) {
           throw new Error('Failed to fetch barbers');
         }
@@ -101,7 +102,7 @@ const BookingPage: React.FC = () => {
         return;
       }
       try {
-        const response = await fetch(`/api/appointments/barber/${selectedBarber._id}`);
+        const response = await fetch(`${API_BASE_URL}/api/appointments/barber/${selectedBarber._id}`);
         if (!response.ok) throw new Error('Failed to fetch appointments');
         const data = await response.json();
         // Only consider appointments for the selected date and with status 'upcoming'
@@ -177,7 +178,7 @@ const BookingPage: React.FC = () => {
       };
 
       // Save to backend
-      const response = await fetch('/api/appointments', {
+      const response = await fetch(`${API_BASE_URL}/api/appointments`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -4,6 +4,7 @@ import Button from '../../components/Button';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import toast from 'react-hot-toast';
+import { API_BASE_URL } from '../../config';
 
 interface Appointment {
   _id: string;
@@ -34,7 +35,7 @@ function BarberAppointmentsPage() {
   const fetchAppointments = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(`https://trimly-9iu5.onrender.com/api/appointments/barber/${user?._id}`);
+      const response = await fetch(`${API_BASE_URL}/api/appointments/barber/${user?._id}`);
       if (!response.ok) {
         throw new Error('Failed to fetch appointments');
       }
@@ -44,7 +45,7 @@ function BarberAppointmentsPage() {
       const appointmentsWithCustomers = await Promise.all(
         data.map(async (appointment: Appointment) => {
           try {
-            const customerResponse = await fetch(`https://trimly-9iu5.onrender.com/api/users/${appointment.userId}`);
+            const customerResponse = await fetch(`${API_BASE_URL}/api/users/${appointment.userId}`);
             if (customerResponse.ok) {
               const customer = await customerResponse.json();
               return {
@@ -71,7 +72,7 @@ function BarberAppointmentsPage() {
 
   const updateAppointmentStatus = async (appointmentId: string, status: 'completed' | 'cancelled') => {
     try {
-      const response = await fetch(`https://trimly-9iu5.onrender.com/api/appointments/${appointmentId}/status`, {
+      const response = await fetch(`${API_BASE_URL}/api/appointments/${appointmentId}/status`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

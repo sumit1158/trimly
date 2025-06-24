@@ -5,6 +5,7 @@ import Button from '../../components/Button';
 import toast from 'react-hot-toast';
 import { useAuth } from '../../contexts/AuthContext';
 import { Dialog } from '@headlessui/react';
+import { API_BASE_URL } from '../../config';
 
 interface Barber {
   _id: string;
@@ -47,7 +48,7 @@ const TopBarbersPage: React.FC = () => {
   useEffect(() => {
     const fetchBarbers = async () => {
       try {
-        const response = await fetch('/api/users?role=barber');
+        const response = await fetch(`${API_BASE_URL}/api/users?role=barber`);
         if (!response.ok) throw new Error('Failed to fetch barbers');
         const data = await response.json();
         setBarbers(data);
@@ -62,7 +63,7 @@ const TopBarbersPage: React.FC = () => {
     if (!selectedBarber) return;
     const fetchBarberDetails = async () => {
       try {
-        const response = await fetch(`/api/users/${selectedBarber._id}`);
+        const response = await fetch(`${API_BASE_URL}/api/users/${selectedBarber._id}`);
         if (!response.ok) throw new Error('Failed to fetch barber details');
         const data = await response.json();
         setBarberDetails(data);
@@ -80,7 +81,7 @@ const TopBarbersPage: React.FC = () => {
     }
     const fetchBookedSlots = async () => {
       try {
-        const response = await fetch(`/api/appointments/barber/${selectedBarber._id}`);
+        const response = await fetch(`${API_BASE_URL}/api/appointments/barber/${selectedBarber._id}`);
         if (!response.ok) throw new Error('Failed to fetch appointments');
         const data = await response.json();
         const slots = data
@@ -98,7 +99,7 @@ const TopBarbersPage: React.FC = () => {
     const fetchFavorites = async () => {
       if (!user?._id) return;
       try {
-        const response = await fetch(`/api/users/favorites/${user._id}`);
+        const response = await fetch(`${API_BASE_URL}/api/users/favorites/${user._id}`);
         if (!response.ok) throw new Error('Failed to fetch favorites');
         const data = await response.json();
         setFavorites(data.favorites.map((fav: any) => fav._id));
@@ -113,7 +114,7 @@ const TopBarbersPage: React.FC = () => {
     const fetchAppointments = async () => {
       if (!user?._id) return;
       try {
-        const response = await fetch(`/api/appointments/user/${user._id}`);
+        const response = await fetch(`${API_BASE_URL}/api/appointments/user/${user._id}`);
         if (!response.ok) throw new Error('Failed to fetch appointments');
         const data = await response.json();
         setAppointments(data);
@@ -192,7 +193,7 @@ const TopBarbersPage: React.FC = () => {
         status: 'upcoming',
         addToQueue: true
       };
-      const response = await fetch('/api/appointments', {
+      const response = await fetch(`${API_BASE_URL}/api/appointments`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(appointment),
@@ -216,13 +217,13 @@ const TopBarbersPage: React.FC = () => {
     try {
       if (isFavorite(barberId)) {
         // Remove from favorites
-        const response = await fetch(`/api/users/favorites/${user._id}/${barberId}`, { method: 'DELETE' });
+        const response = await fetch(`${API_BASE_URL}/api/users/favorites/${user._id}/${barberId}`, { method: 'DELETE' });
         if (!response.ok) throw new Error('Failed to remove from favorites');
         setFavorites(favorites.filter(id => id !== barberId));
         toast.success('Removed from favorites');
       } else {
         // Add to favorites
-        const response = await fetch(`/api/users/favorites/${user._id}`, {
+        const response = await fetch(`${API_BASE_URL}/api/users/favorites/${user._id}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ barberId })
@@ -248,7 +249,7 @@ const TopBarbersPage: React.FC = () => {
   const handleCancelAppointment = async (appointment: any) => {
     if (!window.confirm('Are you sure you want to cancel this appointment?')) return;
     try {
-      const response = await fetch(`/api/appointments/${appointment._id}/status`, {
+      const response = await fetch(`${API_BASE_URL}/api/appointments/${appointment._id}/status`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: 'cancelled' })
@@ -271,7 +272,7 @@ const TopBarbersPage: React.FC = () => {
     if (!rescheduleAppointment || !rescheduleDate || !rescheduleTime) return;
     setIsRescheduling(true);
     try {
-      const response = await fetch(`/api/appointments/${rescheduleAppointment._id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/appointments/${rescheduleAppointment._id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ date: rescheduleDate, time: rescheduleTime })

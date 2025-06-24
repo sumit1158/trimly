@@ -3,6 +3,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { Plus, Trash2, Edit2, Clock, DollarSign } from 'lucide-react';
 import Button from '../../components/Button';
 import toast from 'react-hot-toast';
+import { API_BASE_URL } from '../../config';
 
 interface Service {
   name: string;
