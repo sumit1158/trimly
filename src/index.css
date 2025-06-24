@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: 37 99 235;      /* #2563EB */
+    --color-primary-light: 96 165 250; /* #60A5FA */
+    --color-secondary: 30 64 175;    /* #1E40AF */
+    --color-accent: 56 189 248;      /* #38BDF8 */
+    --color-success: 34 197 94;      /* #22C55E */
+    --color-warning: 245 158 66;     /* #F59E42 */
+    --color-error: 239 68 68;        /* #EF4444 */
+    --color-bg: 241 245 249;         /* #F1F5F9 */
+    --color-bg-dark: 15 23 42;       /* #0F172A */
+    --color-text: 15 23 42;          /* #0F172A */
+    --color-text-dark: 241 245 249;  /* #F1F5F9 */
+    --color-border: 203 213 225;     /* #CBD5E1 */
+    --color-muted: 203 213 225;      /* #CBD5E1 */
+    --color-card: 255 255 255;       /* #FFFFFF */
+    --color-card-dark: 30 41 59;     /* #1E293B */
+  }
+
+  body {
+    @apply bg-[rgb(var(--color-bg))] text-[rgb(var(--color-text))] antialiased transition-colors dark:bg-[rgb(var(--color-bg-dark))] dark:text-[rgb(var(--color-text-dark))];
+  }
+
+  .dark {
+    --color-primary: 37 99 235;      /* #2563EB */
+    --color-primary-light: 96 165 250; /* #60A5FA */
+    --color-secondary: 30 64 175;    /* #1E40AF */
+    --color-accent: 56 189 248;      /* #38BDF8 */
+    --color-success: 34 197 94;      /* #22C55E */
+    --color-warning: 245 158 66;     /* #F59E42 */
+    --color-error: 239 68 68;        /* #EF4444 */
+    --color-bg: 15 23 42;            /* #0F172A */
+    --color-bg-dark: 15 23 42;       /* #0F172A */
+    --color-text: 241 245 249;       /* #F1F5F9 */
+    --color-text-dark: 241 245 249;  /* #F1F5F9 */
+    --color-border: 203 213 225;     /* #CBD5E1 */
+    --color-muted: 203 213 225;      /* #CBD5E1 */
+    --color-card: 30 41 59;          /* #1E293B */
+    --color-card-dark: 30 41 59;     /* #1E293B */
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-accent focus-visible:ring-primary;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-white hover:bg-primary focus-visible:ring-secondary;
+  }
+
+  .btn-outline {
+    @apply border border-[rgb(var(--color-border))] bg-transparent hover:bg-primary/10 hover:text-primary focus-visible:ring-primary;
+  }
+
+  .btn-ghost {
+    @apply bg-transparent text-foreground hover:bg-primary/10 dark:hover:bg-accent/20;
+  }
+
+  .card {
+    @apply rounded-lg border border-[rgb(var(--color-border))] bg-[rgb(var(--color-card))] p-5 shadow-sm transition-all dark:border-[rgb(var(--color-border))] dark:bg-[rgb(var(--color-card-dark))];
+  }
+
+  .input {
+    @apply flex h-10 w-full rounded-md border border-[rgb(var(--color-border))] bg-white px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-[rgb(var(--color-border))] dark:bg-[rgb(var(--color-bg-dark))] dark:placeholder:text-gray-500;
+  }
+
+  .badge {
+    @apply inline-flex items-center rounded-full border border-transparent px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+
+  .badge-primary {
+    @apply bg-primary/10 text-primary dark:bg-primary/20;
+  }
+
+  .badge-secondary {
+    @apply bg-secondary/10 text-secondary dark:bg-secondary/20;
+  }
+
+  .badge-accent {
+    @apply bg-accent/10 text-accent dark:bg-accent/20;
+  }
+
+  .badge-success {
+    @apply bg-success/10 text-success dark:bg-success/20;
+  }
+
+  .badge-warning {
+    @apply bg-warning/10 text-warning dark:bg-warning/20;
+  }
+
+  .badge-error {
+    @apply bg-error/10 text-error dark:bg-error/20;
+  }
+
+  .animate-fade-in {
+    @apply animate-[fade-in_0.3s_ease-in-out];
+  }
+
+  .animate-slide-in-bottom {
+    @apply animate-[slide-in-bottom_0.3s_ease-in-out];
+  }
+
+  .animate-slide-in-top {
+    @apply animate-[slide-in-top_0.3s_ease-in-out];
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-bottom {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-top {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
