@@ -73,8 +73,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       });
 
       if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || 'Login failed');
+        let errorMessage = 'Login failed';
+        try {
+          const contentType = response.headers.get('content-type');
+          if (contentType && contentType.includes('application/json')) {
+            const error = await response.json();
+            errorMessage = error.message || errorMessage;
+          }
+        } catch (e) {}
+        throw new Error(errorMessage);
       }
 
       const userData = await response.json();
@@ -114,8 +121,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       });
 
       if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || 'Registration failed');
+        let errorMessage = 'Registration failed';
+        try {
+          const contentType = response.headers.get('content-type');
+          if (contentType && contentType.includes('application/json')) {
+            const error = await response.json();
+            errorMessage = error.message || errorMessage;
+          }
+        } catch (e) {}
+        throw new Error(errorMessage);
       }
 
       const userData = await response.json();
@@ -143,8 +157,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       });
 
       if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || 'Profile update failed');
+        let errorMessage = 'Profile update failed';
+        try {
+          const contentType = response.headers.get('content-type');
+          if (contentType && contentType.includes('application/json')) {
+            const error = await response.json();
+            errorMessage = error.message || errorMessage;
+          }
+        } catch (e) {}
+        throw new Error(errorMessage);
       }
 
       const updatedUser = await response.json();
@@ -172,8 +193,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       });
 
       if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || 'Password change failed');
+        let errorMessage = 'Password change failed';
+        try {
+          const contentType = response.headers.get('content-type');
+          if (contentType && contentType.includes('application/json')) {
+            const error = await response.json();
+            errorMessage = error.message || errorMessage;
+          }
+        } catch (e) {}
+        throw new Error(errorMessage);
       }
 
       const updatedUser = await response.json();
