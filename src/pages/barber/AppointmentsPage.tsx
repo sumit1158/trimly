@@ -34,7 +34,7 @@ function BarberAppointmentsPage() {
   const fetchAppointments = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(`http://localhost:5000/api/appointments/barber/${user?._id}`);
+      const response = await fetch(`https://trimly-9iu5.onrender.com/api/appointments/barber/${user?._id}`);
       if (!response.ok) {
         throw new Error('Failed to fetch appointments');
       }
@@ -44,7 +44,7 @@ function BarberAppointmentsPage() {
       const appointmentsWithCustomers = await Promise.all(
         data.map(async (appointment: Appointment) => {
           try {
-            const customerResponse = await fetch(`http://localhost:5000/api/users/${appointment.userId}`);
+            const customerResponse = await fetch(`https://trimly-9iu5.onrender.com/api/users/${appointment.userId}`);
             if (customerResponse.ok) {
               const customer = await customerResponse.json();
               return {
@@ -71,7 +71,7 @@ function BarberAppointmentsPage() {
 
   const updateAppointmentStatus = async (appointmentId: string, status: 'completed' | 'cancelled') => {
     try {
-      const response = await fetch(`http://localhost:5000/api/appointments/${appointmentId}/status`, {
+      const response = await fetch(`https://trimly-9iu5.onrender.com/api/appointments/${appointmentId}/status`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

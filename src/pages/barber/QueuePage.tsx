@@ -96,7 +96,7 @@ const QueuePage: React.FC = () => {
 
   const fetchQueue = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/queue/barber/${user?._id}`);
+      const response = await fetch(`https://trimly-9iu5.onrender.com/api/queue/barber/${user?._id}`);
       if (!response.ok) {
         throw new Error('Failed to fetch queue');
       }
@@ -112,7 +112,7 @@ const QueuePage: React.FC = () => {
 
   const fetchAppointments = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/appointments/barber/${user?._id}`);
+      const response = await fetch(`https://trimly-9iu5.onrender.com/api/appointments/barber/${user?._id}`);
       if (!response.ok) {
         throw new Error('Failed to fetch appointments');
       }
@@ -122,7 +122,7 @@ const QueuePage: React.FC = () => {
       const appointmentsWithCustomers = await Promise.all(
         data.map(async (appointment: Appointment) => {
           try {
-            const customerResponse = await fetch(`http://localhost:5000/api/users/${appointment.userId}`);
+            const customerResponse = await fetch(`https://trimly-9iu5.onrender.com/api/users/${appointment.userId}`);
             if (customerResponse.ok) {
               const customer = await customerResponse.json();
               return {
@@ -163,7 +163,7 @@ const QueuePage: React.FC = () => {
         status: 'waiting'
       };
 
-      const response = await fetch('http://localhost:5000/api/queue', {
+      const response = await fetch('https://trimly-9iu5.onrender.com/api/queue', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -202,7 +202,7 @@ const QueuePage: React.FC = () => {
         isWalkIn: true
       };
 
-      const response = await fetch('http://localhost:5000/api/queue', {
+      const response = await fetch('https://trimly-9iu5.onrender.com/api/queue', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -232,7 +232,7 @@ const QueuePage: React.FC = () => {
 
   const handleStatusUpdate = async (queueId: string, newStatus: QueueItem['status']) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/queue/${queueId}/status`, {
+      const response = await fetch(`https://trimly-9iu5.onrender.com/api/queue/${queueId}/status`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -254,7 +254,7 @@ const QueuePage: React.FC = () => {
 
   const removeFromQueue = async (queueId: string) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/queue/${queueId}`, {
+      const response = await fetch(`https://trimly-9iu5.onrender.com/api/queue/${queueId}`, {
         method: 'DELETE',
       });
 

@@ -71,10 +71,10 @@ const DashboardPage: React.FC = () => {
 
       // Fetch all analytics data in parallel
       const [analyticsRes, revenueRes, serviceRes, customerRes] = await Promise.all([
-        fetch(`http://localhost:5000/api/analytics/barber/${barberId}/overview?period=${period}`),
-        fetch(`http://localhost:5000/api/analytics/barber/${barberId}/revenue-trends?days=30`),
-        fetch(`http://localhost:5000/api/analytics/barber/${barberId}/service-performance?period=${period}`),
-        fetch(`http://localhost:5000/api/analytics/barber/${barberId}/customer-analytics?period=${period}`)
+        fetch(`https://trimly-9iu5.onrender.com/api/analytics/barber/${barberId}/overview?period=${period}`),
+        fetch(`https://trimly-9iu5.onrender.com/api/analytics/barber/${barberId}/revenue-trends?days=30`),
+        fetch(`https://trimly-9iu5.onrender.com/api/analytics/barber/${barberId}/service-performance?period=${period}`),
+        fetch(`https://trimly-9iu5.onrender.com/api/analytics/barber/${barberId}/customer-analytics?period=${period}`)
       ]);
 
       const [analytics, revenue, service, customer] = await Promise.all([

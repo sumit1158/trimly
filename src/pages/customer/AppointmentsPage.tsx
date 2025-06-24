@@ -57,7 +57,7 @@ const CustomerAppointmentsPage: React.FC = () => {
   const fetchAppointments = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(`http://localhost:5000/api/appointments/user/${user?._id}`);
+      const response = await fetch(`https://trimly-9iu5.onrender.com/api/appointments/user/${user?._id}`);
       if (!response.ok) {
         throw new Error('Failed to fetch appointments');
       }
@@ -73,7 +73,7 @@ const CustomerAppointmentsPage: React.FC = () => {
 
   const handleCancel = async (appointmentId: string) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/appointments/${appointmentId}/status`, {
+      const response = await fetch(`https://trimly-9iu5.onrender.com/api/appointments/${appointmentId}/status`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -139,7 +139,7 @@ const CustomerAppointmentsPage: React.FC = () => {
     appointment._ratingValue = star;
     setAppointments([...appointments]);
     try {
-      const res = await fetch(`/api/appointments/${appointment._id}/rating`, {
+      const res = await fetch(`https://trimly-9iu5.onrender.com/api/appointments/${appointment._id}/rating`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ rating: star })

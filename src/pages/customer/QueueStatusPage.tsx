@@ -31,7 +31,7 @@ const QueueStatusPage: React.FC = () => {
     try {
       setIsLoading(true);
       // Get all queues where this customer is present
-      const response = await fetch(`http://localhost:5000/api/queue/customer/${user?._id}`);
+      const response = await fetch(`https://trimly-9iu5.onrender.com/api/queue/customer/${user?._id}`);
       if (!response.ok) {
         throw new Error('Failed to fetch queue status');
       }
@@ -42,7 +42,7 @@ const QueueStatusPage: React.FC = () => {
         data.map(async (item: QueueItem) => {
           try {
             // Get all waiting customers in this barber's queue
-            const queueResponse = await fetch(`http://localhost:5000/api/queue/barber/${item.barberId}`);
+            const queueResponse = await fetch(`https://trimly-9iu5.onrender.com/api/queue/barber/${item.barberId}`);
             if (queueResponse.ok) {
               const allQueue = await queueResponse.json();
               const waitingQueue = allQueue
