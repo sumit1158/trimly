@@ -84,7 +84,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         throw new Error(errorMessage);
       }
 
-      const userData = await response.json();
+      let userData = null;
+      try {
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+          userData = await response.json();
+        }
+      } catch (e) {}
+      if (!userData) {
+        throw new Error('No user data returned from server');
+      }
       setUser(userData.user);
       localStorage.setItem('trimly_user', JSON.stringify(userData.user));
       localStorage.setItem('trimly_user_role', userData.user.role);
@@ -132,7 +141,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         throw new Error(errorMessage);
       }
 
-      const userData = await response.json();
+      let userData = null;
+      try {
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+          userData = await response.json();
+        }
+      } catch (e) {}
+      if (!userData) {
+        throw new Error('No user data returned from server');
+      }
       setUser(userData.user);
       localStorage.setItem('trimly_user', JSON.stringify(userData.user));
       localStorage.setItem('trimly_user_role', userData.user.role);
@@ -168,7 +186,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         throw new Error(errorMessage);
       }
 
-      const updatedUser = await response.json();
+      let updatedUser = null;
+      try {
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+          updatedUser = await response.json();
+        }
+      } catch (e) {}
+      if (!updatedUser) {
+        throw new Error('No user data returned from server');
+      }
       const userObj = updatedUser.user || updatedUser;
       setUser(userObj);
       localStorage.setItem('trimly_user', JSON.stringify(userObj));
@@ -204,7 +231,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         throw new Error(errorMessage);
       }
 
-      const updatedUser = await response.json();
+      let updatedUser = null;
+      try {
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+          updatedUser = await response.json();
+        }
+      } catch (e) {}
+      if (!updatedUser) {
+        throw new Error('No user data returned from server');
+      }
       const userObj = updatedUser.user || updatedUser;
       setUser(userObj);
       localStorage.setItem('trimly_user', JSON.stringify(userObj));
