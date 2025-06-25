@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">trimly-barber</string>
-    <string name="title_activity_main">trimly-barber</string>
-    <string name="package_name">com.trimly.barber</string>
-    <string name="custom_url_scheme">com.trimly.barber</string>
+    <string name="app_name">trimly</string>
+    <string name="title_activity_main">trimly</string>
+    <string name="package_name">com.manasi.trimly</string>
+    <string name="custom_url_scheme">com.manasi.trimly</string>
 </resources>

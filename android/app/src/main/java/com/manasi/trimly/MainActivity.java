@@ -1,4 +1,4 @@
-package com.trimly.barber;
+package com.manasi.trimly;
 
 import com.getcapacitor.BridgeActivity;
 
