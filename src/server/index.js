@@ -27,7 +27,10 @@ const app = express();
 app.use(express.static(path.join(__dirname, '../../dist')));
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: "https://trimlybe.onrender.com", 
+  credentials: true
+}));
 app.use(express.json());
 
 // Request logging middleware
