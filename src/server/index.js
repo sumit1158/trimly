@@ -23,6 +23,9 @@ dotenv.config({ path: path.join(__dirname, '.env') });
 
 const app = express();
 
+// Serve static files from the dist directory
+app.use(express.static(path.join(__dirname, '../../dist')));
+
 // Middleware
 app.use(cors());
 app.use(express.json());
@@ -39,6 +42,11 @@ app.use('/api/appointments', appointmentRoutes);
 app.use('/api/queue', queueRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/sms', smsRoutes);
+
+// Catch-all route to serve index.html for client-side routing
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../dist/index.html'));
+});
 
 // Error handling middleware
 app.use((err, req, res, next) => {
