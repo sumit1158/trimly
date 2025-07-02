@@ -28,7 +28,7 @@ app.use(express.static(path.join(__dirname, '../../dist')));
 
 // Middleware
 app.use(cors({
-  origin: "https://trimlybe.onrender.com", 
+  origin: "https://frontend-psd7.onrender.com",
   credentials: true
 }));
 app.use(express.json());
