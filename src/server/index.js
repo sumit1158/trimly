@@ -44,7 +44,7 @@ app.use('/api/analytics', analyticsRoutes);
 app.use('/api/sms', smsRoutes);
 
 // Catch-all route to serve index.html for client-side routing
-app.get('*', (req, res) => {
+app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../../dist/index.html'));
 });
 
