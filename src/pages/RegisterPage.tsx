@@ -201,25 +201,6 @@ const RegisterPage: React.FC = () => {
       const randomAvatar = `https://api.dicebear.com/7.x/initials/svg?seed=${formData.name}&backgroundColor=007bff,64b5f6,2196f3,03a9f4,8bc34a,4caf50,ff9800,ff5722&backgroundType=gradientLinear,solid&radius=50`;
       registrationData.avatar = randomAvatar;
 
-      // Removed: Get coordinates from address if it's a barber
-      // if (formData.role === 'barber' && formData.address) {
-      //   try {
-      //     const address = `${formData.address}, ${formData.city}, ${formData.state} ${formData.zipCode}`;
-      //     const response = await fetch(
-      //       `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`
-      //     );
-      //     const data = await response.json();
-      //     
-      //     if (data && data[0]) {
-      //       registrationData.coordinates = {
-      //         lat: parseFloat(data[0].lat),
-      //         lng: parseFloat(data[0].lon)
-      //       };
-      //     }
-      //   } catch (error) {
-      //     console.error('Error getting coordinates:', error);
-      //   }
-      // }
       
       await register(formData.email, formData.password, formData.name, formData.role, registrationData);
       
