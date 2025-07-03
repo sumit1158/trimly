@@ -31,7 +31,7 @@ const LoginPage: React.FC = () => {
       
       // Redirect based on user role
       const userRole = localStorage.getItem('trimly_user_role');
-      const redirectPath = userRole === 'barber' ? '/barber/dashboard' : '/customer/dashboard';
+      const redirectPath = userRole === 'barber' ? '/barber' : '/customer';
       
       toast.success('Login successful!');
       navigate(redirectPath);
