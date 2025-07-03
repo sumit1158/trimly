@@ -152,9 +152,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (!userData) {
         throw new Error('No user data returned from server');
       }
-      setUser(userData.user);
-      localStorage.setItem('trimly_user', JSON.stringify(userData.user));
-      localStorage.setItem('trimly_user_role', userData.user.role);
+      // Do NOT setUser or localStorage here; just resolve
     } catch (error) {
       console.error('Registration failed:', error);
       throw error;
